@@ -1,7 +1,6 @@
-
 #include <iostream>
 using namespace std;
-	enum eDir {
+	enum eSuun {
 	STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, UPRIGHT = 5, DOWNRIGHT = 6	//nimet‰‰n koordinaatit mit‰ k‰ytet‰‰n
 };
 	class cPallo		//Luodaan palloluokka
@@ -9,7 +8,7 @@ using namespace std;
 private:
 	int x, y;
 	int origX, origY;
-	eDir suunta;
+	eSuun suunta;
 
 
 	public
@@ -29,20 +28,21 @@ private:
 	direction = STOP;
 
 }	
-	void suunnanmuutos(eDir d)		//Luodaan suunnanmuutoksille omat funktiot
+	void suunnanmuutos(eSuun d)		//Luodaan suunnanmuutoksille omat funktiot
 	{
 		direction = d;
 	}
 	void randomsuunta()
 	{
-		direction = (eDir)((rand() % 6) + 1);
-
+		direction = (eSuun)((rand() % 6) + 1);
+	}
 		inline int getX() { return x; }
 		inline int getY() { return y; }
-		inline eDir haesuunta() { return suunta; }
+		inline eSuun haesuunta() { return suunta; }
+		
 
-
-		void liike()		//Luodaan suunnanvaihtojen funktiot
+		void liiku()	
+		{						//Luodaan suunnanvaihtojen funktiot
 			switch (suunta)
 			{
 			case STOP:
@@ -54,7 +54,7 @@ private:
 				x++;
 				break;
 			case UPLEFT:
-				x--; y--:
+				x--; y--;
 				break;
 			case DOWNLEFT:
 				x--; y--;
@@ -62,24 +62,25 @@ private:
 			case UPRIGHT:
 				x++; y--;
 				break;
-
 			case DOWNRIGHT:
 				x++; y++;
 				break;
 			default:
 				break;
 			}
-	}
-	kaveri ostream & operator<<(ostream & o, cPallo c)	
+		}
+	 
+	apuri ostream& operator<<(ostream& o, cPallo c)
 	{
 		o << "Pallo [" << c.x << "," << c.y << "]" << c.suunta << "]" << endl;
 		return o;
+	}
  };
 
 
 int main()
 {
-	cPallo c(0, 0);
+	cPallo c(0, 0);			//Luodaan objekti cPallo
 	cout << c << endl;
 	c.randomsuunta();
 	cout << c << endl;
@@ -88,7 +89,9 @@ int main()
 	c.randomsuunta();
 	c.liiku();
 	cout << c << endl;
-	
+	c.randomsuunta();
+		c.liiku();
+	cout << c << endl;
 
 
 	return 0;
