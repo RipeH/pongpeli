@@ -1,4 +1,6 @@
 #include <iostream>
+#include <time.h>
+#include <conio.h>
 using namespace std;
 	enum eSuun {
 	STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, UPRIGHT = 5, DOWNRIGHT = 6	//nimet‰‰n koordinaatit mit‰ k‰ytet‰‰n
@@ -108,18 +110,23 @@ private:
 		 return o;
 	 }
  };
-
-
+ class cPelimoottori			//Luodaan pelimoottori jossa on kaikki objektit mit‰ tarvitaa
+ {
+ private:
+	 int leveys, korkeus;
+	 int pisteet1, pisteet2;
+	 char ylos1, alas1, ylos2, alas2;
+	 bool quit;
+	 cPallo* ball;
+	 cMaila* pelaaja1;
+	 cMaila* pelaaja2;
+ public:
+	 cPelimoottori (int l, int k)
+	 {srand()
+ };
 int main()
 {
-	cMaila p1(0, 0);
-	cMaila p2(10, 0);
-	cout << p1 << endl;
-	cout << p2 << endl;
-	p1.liikuYlos();
-	p2.liikuAlas();
-	cout << p1 << endl;
-	cout << p2 << endl;
+
 
 	return 0;
 }
