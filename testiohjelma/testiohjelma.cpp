@@ -192,7 +192,7 @@ public:
 					 cout << "\xDB";
 				 else if (pelaaja2x == j && pelaaja2y + 3 == i)
 					 cout << "\xDB";
-				 else //Tämä kohta tässä, hakkasin päätä seinään kauan mutta piti vain lisätä välilyönti niin korjaantu seinät.
+				 else			//Tämä kohta tässä, hakkasin päätä seinään kauan mutta piti vain lisätä välilyönti niin korjaantu seinät.
 					 cout << " ";
 
 
@@ -205,6 +205,44 @@ public:
 			 cout << "\xB2";
 		 cout << endl;
 	 }	 
+	 void input()			//Luodaan ohjauskomennot mailoille
+	 {
+		 pallo->liiku();
+
+		 int pallox = pallo->haeX();
+		 int palloy = pallo->haeY();
+		 int pelaaja1x = pelaaja1->haeX();
+		 int pelaaja2x = pelaaja2->haeX();
+		 int pelaaja1y = pelaaja1->haeY();
+		 int pelaaja2y = pelaaja2->haeY();
+
+		 if (_kbhit())				//Näppäimistön klikkauksesta ylös, alas yms.
+		 {
+			 char current = _getch();
+			 if (current == ylos1)
+				 if (pelaaja1y > 0)
+					 pelaaja1->liikuylos();
+			 
+			 if (current == ylos2)
+				 if (pelaaja2y > 0)
+					 pelaaja2->liikuylos();
+			 
+			 if (current == alas1)
+				 if (pelaaja1y + 4 < korkeus)
+					 pelaaja1->liikualas();
+
+			 if (current == alas2)
+				 if (pelaaja2y + 4 < korkeus)
+					 pelaaja2->liikualas();
+
+			 if (pallo->haesuunta() == STOP)
+				 pallo->randomsuunta();
+
+			 if (current = 'q')
+				 quit = true;
+
+		 }
+	 }
  };
 int main()
 {
