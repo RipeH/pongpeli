@@ -81,7 +81,9 @@ public:
  private:
 	 int x, y;
 	int origX, origY;
+ 
  public:
+
 	 cMaila()
 	 {
 		 x = y = 0;
@@ -221,33 +223,82 @@ public:
 			 char current = _getch();
 			 if (current == ylos1)
 				 if (pelaaja1y > 0)
-					 pelaaja1->liikuylos();
+					 pelaaja1->liikuYlos();
 			 
 			 if (current == ylos2)
 				 if (pelaaja2y > 0)
-					 pelaaja2->liikuylos();
+					 pelaaja2->liikuYlos();
 			 
 			 if (current == alas1)
 				 if (pelaaja1y + 4 < korkeus)
-					 pelaaja1->liikualas();
+					 pelaaja1->liikuAlas();
 
 			 if (current == alas2)
 				 if (pelaaja2y + 4 < korkeus)
-					 pelaaja2->liikualas();
+					 pelaaja2->liikuAlas();
 
 			 if (pallo->haesuunta() == STOP)
 				 pallo->randomsuunta();
 
-			 if (current = 'q')
+			 if (current == 'q')
 				 quit = true;
 
 		 }
 	 }
+	 void logiikka()
+	 {
+		 int pallox = pallo->haeX();
+		 int palloy = pallo->haeY();
+		 int pelaaja1x = pelaaja1->haeX();
+		 int pelaaja2x = pelaaja2->haeX();
+		 int pelaaja1y = pelaaja1->haeY();
+		 int pelaaja2y = pelaaja2->haeY();
+		
+		 
+		 //vasen maila
+		 for (int i = 0; i < 4; i++)
+			 if (pallox == pelaaja1x + 1)
+				 if (palloy == pelaaja1y + i)
+					 pallo->suunnanmuutos((eSuun)((rand() % 3) + 4));
+		 //oikea maila
+		 for (int i = 0; i < 4; i++)
+			 if (pallox == pelaaja2x - 1)
+				 if (palloy == pelaaja2y + i)
+					 pallo->suunnanmuutos((eSuun)((rand() % 3) + 1));
+		
+		 //alaseinä
+		 if (palloy == korkeus - 1)
+			 pallo->suunnanmuutos(pallo->haesuunta() == DOWNRIGHT ? UPRIGHT : UPLEFT);
+		 //yläseinä
+		 if (palloy == 0)
+			 pallo->suunnanmuutos(pallo->haesuunta() == UPRIGHT ? DOWNRIGHT : DOWNLEFT);
+		 //oikeanpuoleinen seinä
+		 if (pallox == leveys - 1)
+			 pisteLisays(pelaaja1);
+		 //vasemmanpuoleinen seinä
+		 if (pallox == 0)
+			 pisteLisays(pelaaja2);
+
+	 }
+	 void run()
+		 {
+			 while (!quit)
+			 {
+				 piirto();
+				 input();
+				 logiikka();
+
+
+			 }
+		 }
+	 
+
  };
 int main()
 {
 	cPelimoottori c(40, 20);
 	c.piirto();
+	c.run();
 	return 0;
 }
 
