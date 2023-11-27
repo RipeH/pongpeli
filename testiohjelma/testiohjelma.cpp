@@ -2,10 +2,10 @@
 #include <time.h>
 #include <conio.h>
 using namespace std;
-	enum eSuun {
-	STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, UPRIGHT = 5, DOWNRIGHT = 6	//nimet‰‰n koordinaatit mit‰ k‰ytet‰‰n
-};
-	class cPallo		//Luodaan palloluokka
+enum eSuun {
+	STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, RIGHT = 4, UPRIGHT = 5, DOWNRIGHT = 6 };	//nimet‰‰n koordinaatit mit‰ k‰ytet‰‰n
+
+class cPallo		//Luodaan palloluokka
 {
 private:
 	int x, y;
@@ -13,8 +13,8 @@ private:
 	eSuun suunta;
 
 
-	public
-		cPallo(int posX, int posY)		//annetaan palloluokalle sijainti ja aloituspiste
+public:
+	cPallo(int posX, int posY)		//annetaan palloluokalle sijainti ja aloituspiste
 	{
 		origX = posX;
 		origY = posY;
@@ -22,56 +22,53 @@ private:
 		suunta = STOP;
 	}
 
+	void Reset()		//Alotetaan peli alusta
 	{
-		void Reset()		//Alotetaan peli alusta
+		x = origX; y = origY;
+		suunta = STOP;
 	}
-
-	x = origX; y = origY;
-	direction = STOP;
-
-}	
 	void suunnanmuutos(eSuun d)		//Luodaan suunnanmuutoksille omat funktiot
 	{
-		direction = d;
+		suunta = d;
 	}
 	void randomsuunta()
 	{
-		direction = (eSuun)((rand() % 6) + 1);
+		suunta = (eSuun)((rand() % 6) + 1);
 	}
-		inline int getX() { return x; }
-		inline int getY() { return y; }
-		inline eSuun haesuunta() { return suunta; }
-		
+	inline int getX() { return x; }
+	inline int getY() { return y; }
+	inline eSuun haesuunta() { return suunta; }
 
-		void liiku()	
-		{						//Luodaan suunnanvaihtojen funktiot
-			switch (suunta)
-			{
-			case STOP:
-				break;
-			case LEFT:
-				x--;
-				break;
-			case RIGHT:
-				x++;
-				break;
-			case UPLEFT:
-				x--; y--;
-				break;
-			case DOWNLEFT:
-				x--; y--;
-				break;
-			case UPRIGHT:
-				x++; y--;
-				break;
-			case DOWNRIGHT:
-				x++; y++;
-				break;
-			default:
-				break;
-			}
+
+	void liiku()
+	{						//Luodaan suunnanvaihtojen funktiot
+		switch (suunta)
+		{
+		case STOP:
+			break;
+		case LEFT:
+			x--;
+			break;
+		case RIGHT:
+			x++;
+			break;
+		case UPLEFT:
+			x--; y--;
+			break;
+		case DOWNLEFT:
+			x--; y--;
+			break;
+		case UPRIGHT:
+			x++; y--;
+			break;
+		case DOWNRIGHT:
+			x++; y++;
+			break;
+		default:
+			break;
 		}
-	 
+	}
+
 	friend ostream & operator<<(ostream& o, cPallo c)
 	{
 		o << "Pallo [" << c.x << "," << c.y << "]" << c.suunta << "]";
@@ -82,8 +79,8 @@ private:
  class cMaila
  {
  private:
-	 int x, y :
-		 int origX, origY;
+	 int x, y;
+	int origX, origY;
  public:
 	 cMaila()
 	 {
@@ -100,8 +97,8 @@ private:
 	 }
 	 inline void Reset() { x = origX; y = origY; }		//mailan liikesuunnat
 	 inline int getX() { return x; }
-	 inline int getY) { return y; }
-	 inline void liikuYlos() { y - ; }
+	 inline int getY() { return y; }
+	 inline void liikuYlos() { y--; }
 	 inline void liikuAlas() { y++; }
 
 	 friend ostream & operator<<(ostream & o, cMaila c) //Luodaan maila
@@ -110,6 +107,7 @@ private:
 		 return o;
 	 }
  };
+
  class cPelimoottori			//Luodaan pelimoottori jossa on kaikki objektit mit‰ tarvitaa
  {
  private:
@@ -149,11 +147,21 @@ private:
 		 player1->Reset();
 		 player2->Reset();
 	 }
+	 void piirto()
+	 {
+		 system("cls");
+		 for (int i = 0; i < leveys + 2; i++)
+			 cout << "#";
+		 cout << endl;
+
+		 for (int i = 0; i < leveys + 2; i++)
+			 cout << "#";
+	 }	 cout << endl;
  };
 int main()
 {
-
-
+	cPelimoottori c(40, 20);
+	c.piirto();
 	return 0;
 }
 
