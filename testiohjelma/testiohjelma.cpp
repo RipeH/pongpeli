@@ -70,29 +70,56 @@ private:
 			}
 		}
 	 
-	apuri ostream& operator<<(ostream& o, cPallo c)
+	friend ostream & operator<<(ostream& o, cPallo c)
 	{
-		o << "Pallo [" << c.x << "," << c.y << "]" << c.suunta << "]" << endl;
+		o << "Pallo [" << c.x << "," << c.y << "]" << c.suunta << "]";
 		return o;
 	}
+ };
+
+ class cMaila
+ {
+ private:
+	 int x, y :
+		 int origX, origY;
+ public:
+	 cMaila()
+	 {
+		 x = y = 0;
+
+	 }
+
+	 cMaila(int posX, int posY) : cMaila()
+	 {
+		 origX = posX;
+		 origY = posY;
+		 x = posX;
+		 y = posY;
+	 }
+	 inline void Reset() { x = origX; y = origY; }		//mailan liikesuunnat
+	 inline int getX() { return x; }
+	 inline int getY) { return y; }
+	 inline void liikuYlos() { y - ; }
+	 inline void liikuAlas() { y++; }
+
+	 friend ostream & operator<<(ostream & o, cMaila c) //Luodaan maila
+	 {
+		 o << "Maila [" << c.x << "," << c.y << "]";
+		 return o;
+	 }
  };
 
 
 int main()
 {
-	cPallo c(0, 0);			//Luodaan objekti cPallo
-	cout << c << endl;
-	c.randomsuunta();
-	cout << c << endl;
-	c.liiku();
-	cout << c << endl;
-	c.randomsuunta();
-	c.liiku();
-	cout << c << endl;
-	c.randomsuunta();
-		c.liiku();
-	cout << c << endl;
-
+	cMaila p1(0, 0);
+	cMaila p2(10, 0);
+	cout << p1 << endl;
+	cout << p2 << endl;
+	p1.liikuYlos();
+	p2.liikuAlas();
+	cout << p1 << endl;
+	cout << p2 << endl;
 
 	return 0;
 }
