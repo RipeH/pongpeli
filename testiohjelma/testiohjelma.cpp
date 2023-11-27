@@ -35,8 +35,8 @@ public:
 	{
 		suunta = (eSuun)((rand() % 6) + 1);
 	}
-	inline int getX() { return x; }
-	inline int getY() { return y; }
+	inline int haeX() { return x; }
+	inline int haeY() { return y; }
 	inline eSuun haesuunta() { return suunta; }
 
 
@@ -71,7 +71,7 @@ public:
 
 	friend ostream & operator<<(ostream& o, cPallo c)
 	{
-		o << "Pallo [" << c.x << "," << c.y << "]" << c.suunta << "]";
+		o << "Pallo [" << c.x << "," << c.y << "][" << c.suunta << "]";
 		return o;
 	}
  };
@@ -96,8 +96,8 @@ public:
 		 y = posY;
 	 }
 	 inline void Reset() { x = origX; y = origY; }		//mailan liikesuunnat
-	 inline int getX() { return x; }
-	 inline int getY() { return y; }
+	 inline int haeX() { return x; }
+	 inline int haeY() { return y; }
 	 inline void liikuYlos() { y--; }
 	 inline void liikuAlas() { y++; }
 
@@ -127,8 +127,7 @@ public:
 		 ylos1 = 'w'; ylos2 = 'i';
 		 alas1 = 's'; alas2 = 'k';
 		 pisteet1 = pisteet2 = 0;
-		 leveys = l;
-		 korkeus = k;
+		 leveys = l; korkeus = k;
 		 pallo = new cPallo(l / 2, k / 2);
 		 pelaaja1 = new cMaila(1, k / 2 - 3);
 		 pelaaja2 = new cMaila(l - 2, k / 2 - 3);
@@ -144,28 +143,30 @@ public:
 		 else if (pelaaja == pelaaja2)
 			 pisteet2++;
 
-		 pallo->eset();
+		 pallo->Reset();
 
 		 pelaaja1->Reset();
 		 pelaaja2->Reset();
 	 }
 	 void piirto()
 	 {
-		 system("cls");
+		 system("cls");									//Annetaan koko pelikentän tiedot minkäkokoinen yms.
 		 for (int i = 0; i < leveys + 2; i++)
 			 cout << "\xB2";
 		 cout << endl;
 
-		 for (int i = 0; i < korkeus; i++)			//Annetaan tiedot mistä pallon arvot tulee
+
+		 for (int i = 0; i < korkeus; i++)			
+		 
 		 {
 			 for (int j = 0; j < leveys; j++)
 			 {
-				 int pallox = pallo->getX();
-				 int palloy = pallo->getY();
-				 int pelaaja1x = pelaaja1->getX();
-				 int pelaaja2x = pelaaja2->getX();
-				 int pelaaja1y = pelaaja1->getY();
-				 int pelaaja2y = pelaaja2->getY();
+				 int pallox = pallo->haeX();
+				 int palloy = pallo->haeY();
+				 int pelaaja1x = pelaaja1->haeX();
+				 int pelaaja2x = pelaaja2->haeX();
+				 int pelaaja1y = pelaaja1->haeY();
+				 int pelaaja2y = pelaaja2->haeY();
 
 				 if (j == 0)
 					 cout << "\xB2";
@@ -177,7 +178,7 @@ public:
 				 else if (pelaaja2x == j && pelaaja2y == i)
 					 cout << "\xDB"; //pelaaja 2 tässä
 				 else
-					 cout << "";
+					 cout << " ";
 
 
 
