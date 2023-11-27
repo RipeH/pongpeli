@@ -177,9 +177,23 @@ public:
 					 cout << "\xDB"; //pelaaja 1 tässä
 				 else if (pelaaja2x == j && pelaaja2y == i)
 					 cout << "\xDB"; //pelaaja 2 tässä
-				 else
-					 cout << " ";
+				
+				 
+				 else if (pelaaja1x == j && pelaaja1y + 1 == i)
+					 cout << "\xDB"; //pelaaja 1
+				 else if (pelaaja1x == j && pelaaja1y + 2 == i)
+					 cout << "\xDB";
+				 else if (pelaaja1x == j && pelaaja1y + 3 == i)
+					 cout << "\xDB";
 
+				 else if (pelaaja2x == j && pelaaja2y + 1 == i)
+					 cout << "\xDB"; //pelaaja 2
+				 else if (pelaaja2x == j && pelaaja2y + 2 == i)
+					 cout << "\xDB";
+				 else if (pelaaja2x == j && pelaaja2y + 3 == i)
+					 cout << "\xDB";
+				 else //Tämä kohta tässä, hakkasin päätä seinään kauan mutta piti vain lisätä välilyönti niin korjaantu seinät.
+					 cout << " ";
 
 
 				 if (j == leveys - 1)
