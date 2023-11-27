@@ -5,7 +5,7 @@ using namespace std;
 enum eSuun {
 	STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, RIGHT = 4, UPRIGHT = 5, DOWNRIGHT = 6 };	//nimetään koordinaatit mitä käytetään
 
-class cPallo		//Luodaan palloluokka
+class cPallo	//Luodaan palloluokka
 {
 private:
 	int x, y;
@@ -115,16 +115,17 @@ public:
 	 int pisteet1, pisteet2;
 	 char ylos1, alas1, ylos2, alas2;
 	 bool quit;
-	 cPallo* ball;
+	 cPallo* pallo;
 	 cMaila* pelaaja1;
 	 cMaila* pelaaja2;
+ 
  public:
 	 cPelimoottori(int l, int k)
 	 {
 		 srand(time(NULL));			//Annetaan mailoille ohjausnapit, sekä kentän leveys ja pallon sijainti
 		 quit = false;
-		 ylos1 = "w"; ylos2 = "i";
-		 alas1 = "s"; alas2 = "k";
+		 ylos1 = 'w'; ylos2 = 'i';
+		 alas1 = 's'; alas2 = 'k';
 		 pisteet1 = pisteet2 = 0;
 		 leveys = l;
 		 korkeus = k;
@@ -134,24 +135,25 @@ public:
 	 }
 	 ~cPelimoottori()
 	 {
-		 delete pallo, pelaaja1, pelaaja 2;			//Poistetaan vanhat tiedot aina uuteen peliin
+		 delete pallo, pelaaja1, pelaaja2;			//Poistetaan vanhat tiedot aina uuteen peliin
 	 }
-	 void pisteLisays(cMaila* player)
+	 void pisteLisays(cMaila* pelaaja)
 	 {
-		 if (player == player1)
+		 if (pelaaja == pelaaja1)
 			 pisteet1++;
-		 else if (player == player2)
+		 else if (pelaaja == pelaaja2)
 			 pisteet2++;
 
-		 pallo->reset();
-		 player1->Reset();
-		 player2->Reset();
+		 pallo->eset();
+
+		 pelaaja1->Reset();
+		 pelaaja2->Reset();
 	 }
 	 void piirto()
 	 {
 		 system("cls");
 		 for (int i = 0; i < leveys + 2; i++)
-			 cout << "#";
+			 cout << "\xB2";
 		 cout << endl;
 
 		 for (int i = 0; i < korkeus; i++)			//Annetaan tiedot mistä pallon arvot tulee
@@ -166,20 +168,28 @@ public:
 				 int pelaaja2y = pelaaja2->getY();
 
 				 if (j == 0)
-					 cout << "#";
+					 cout << "\xB2";
 
 				 if (pallox == j && palloy == i)
 					 cout << "0"; //pallo on tässä
-				 else if(pelaaja1x == j && pelaaja1y == i)
-					 cout <<"#" //pelaaja 1 tässä
+				 else if (pelaaja1x == j && pelaaja1y == i)
+					 cout << "\xDB"; //pelaaja 1 tässä
 				 else if (pelaaja2x == j && pelaaja2y == i)
-					 cout << "#" //pelaaja 2 tässä
+					 cout << "\xDB"; //pelaaja 2 tässä
+				 else
+					 cout << "";
+
+
 
 				 if (j == leveys - 1)
-					 cout << "#";
+					 cout << "\xB2";
 			}
+			 cout << endl;
 		 }
-	 }	 cout << endl;
+		 for (int i = 0; i < leveys + 2; i++)
+			 cout << "\xB2";
+		 cout << endl;
+	 }	 
  };
 int main()
 {
