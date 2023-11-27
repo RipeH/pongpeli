@@ -154,8 +154,31 @@ public:
 			 cout << "#";
 		 cout << endl;
 
-		 for (int i = 0; i < leveys + 2; i++)
-			 cout << "#";
+		 for (int i = 0; i < korkeus; i++)			//Annetaan tiedot mistä pallon arvot tulee
+		 {
+			 for (int j = 0; j < leveys; j++)
+			 {
+				 int pallox = pallo->getX();
+				 int palloy = pallo->getY();
+				 int pelaaja1x = pelaaja1->getX();
+				 int pelaaja2x = pelaaja2->getX();
+				 int pelaaja1y = pelaaja1->getY();
+				 int pelaaja2y = pelaaja2->getY();
+
+				 if (j == 0)
+					 cout << "#";
+
+				 if (pallox == j && palloy == i)
+					 cout << "0"; //pallo on tässä
+				 else if(pelaaja1x == j && pelaaja1y == i)
+					 cout <<"#" //pelaaja 1 tässä
+				 else if (pelaaja2x == j && pelaaja2y == i)
+					 cout << "#" //pelaaja 2 tässä
+
+				 if (j == leveys - 1)
+					 cout << "#";
+			}
+		 }
 	 }	 cout << endl;
  };
 int main()
