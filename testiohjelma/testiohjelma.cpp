@@ -121,8 +121,34 @@ private:
 	 cMaila* pelaaja1;
 	 cMaila* pelaaja2;
  public:
-	 cPelimoottori (int l, int k)
-	 {srand()
+	 cPelimoottori(int l, int k)
+	 {
+		 srand(time(NULL));			//Annetaan mailoille ohjausnapit, sekä kentän leveys ja pallon sijainti
+		 quit = false;
+		 ylos1 = "w"; ylos2 = "i";
+		 alas1 = "s"; alas2 = "k";
+		 pisteet1 = pisteet2 = 0;
+		 leveys = l;
+		 korkeus = k;
+		 pallo = new cPallo(l / 2, k / 2);
+		 pelaaja1 = new cMaila(1, k / 2 - 3);
+		 pelaaja2 = new cMaila(l - 2, k / 2 - 3);
+	 }
+	 ~cPelimoottori()
+	 {
+		 delete pallo, pelaaja1, pelaaja 2;			//Poistetaan vanhat tiedot aina uuteen peliin
+	 }
+	 void pisteLisays(cMaila* player)
+	 {
+		 if (player == player1)
+			 pisteet1++;
+		 else if (player == player2)
+			 pisteet2++;
+
+		 pallo->reset();
+		 player1->Reset();
+		 player2->Reset();
+	 }
  };
 int main()
 {
