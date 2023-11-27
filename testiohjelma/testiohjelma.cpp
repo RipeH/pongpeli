@@ -206,6 +206,8 @@ public:
 		 for (int i = 0; i < leveys + 2; i++)
 			 cout << "\xB2";
 		 cout << endl;
+
+		 cout << "Pelaaja 1 pisteet: " << pisteet1 << endl << "Pelaaja 2 pisteet: " << pisteet2 << endl;
 	 }	 
 	 void input()			//Luodaan ohjauskomennot mailoille
 	 {
